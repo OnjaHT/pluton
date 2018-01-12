@@ -12,7 +12,7 @@ self.addEventListener('install', function(event) {
         caches.open(CACHE_VERSION)
         .then(function(cache) {
             return cache.addAll([
-                '/css/animate.css'
+                '/pluton/css/animate.css'
             ]);
         })
     );
