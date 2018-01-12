@@ -1,0 +1,32 @@
+{
+  "name": "Pluton",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  
+
+  "description": "Juste un petit test avec pluton",
+  "default_locale": "fr",
+
+  "icons": {
+    "48": "images/ico/icon-48.png",
+    "96": "images/ico/icon-96.png"
+  },
+
+  
+  "gcm_sender_id": "894523585077",
+
+  "applications": {
+    "gecko": {
+      "id": "addon@example.com",
+      "strict_min_version": "42.0"
+    }
+  },
+
+  "permissions": [
+      "webNavigation",
+      "geolocation",
+      "notifications",
+      "storage",
+      "nativeMessaging"
+    ]
+}
