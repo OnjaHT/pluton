@@ -1,7 +1,7 @@
 if ('serviceWorker' in navigator) {
     //Enregistrement et lancement du service Worker
     navigator.serviceWorker.register( 
-        '/pluton/js/service-worker/service-worker.js'/*?v=' + Date.now()*/, 
+        '/pluton/service-worker.js'/*?v=' + Date.now()*/, 
         { 
             scope: '/pluton/' 
         }
