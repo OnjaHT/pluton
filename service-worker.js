@@ -70,7 +70,7 @@ self.addEventListener('fetch', function(event) {
 
                 caches.open(CACHE_VERSION) //On ouvre le cache
                 .then(function(cache) {
-                    // cache.put(request, responseClone); //On l'ajoute au cache
+                    cache.put(request, responseClone); //On l'ajoute au cache
                 })
                 .catch(function() {
                     console.log('FETCH > Error open cache');

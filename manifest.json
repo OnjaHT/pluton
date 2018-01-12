@@ -7,10 +7,18 @@
   "description": "Juste un petit test avec pluton",
   "default_locale": "fr",
 
-  "icons": {
-    "48": "images/ico/icon-48.png",
-    "96": "images/ico/icon-96.png"
-  },
+  "icons": [
+    {
+        "src": "images/ico/icon-48.png",
+        "sizes": "48x48",
+        "type": "image/png"
+    },
+    {
+        "src": "images/ico/icon-96.png",
+        "sizes": "96x96",
+        "type": "image/png"
+    },
+  ],
 
   
   "gcm_sender_id": "894523585077",
