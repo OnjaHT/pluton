@@ -49,6 +49,8 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
     let request = event.request;
 
+    console.log('Request', request);
+
     if ( request.method !== 'GET' ) {
         return;
     }
