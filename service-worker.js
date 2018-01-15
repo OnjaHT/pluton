@@ -1,6 +1,6 @@
 // console.log('Service worker', this);
 
-var ROOT_URl = 'https://onjaharitiana.github.io/pluton/';
+var ROOT_URL = 'https://onjaharitiana.github.io/pluton/';
 var CACHE_VERSION = '1.0';
 
 /**
