@@ -93,15 +93,15 @@ self.addEventListener('activate', function(event) {
 var logged = true;
 self.addEventListener('fetch', function(event) {
     if ( logged ) {
-        logged = true;
+        logged = false;
         // This looks to see if the current is already open and
         // focuses if it is
-        event.waitUntil(clients.matchAll({
+        clients.matchAll({
             type: "window"
         })
         .then(function(clientList) {
             console.log('clientList', clientList);
-        }));
+        });
     }
     event.respondWith(
         caches.open(CACHE_VERSION)
