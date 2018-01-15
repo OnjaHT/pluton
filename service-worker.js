@@ -47,44 +47,58 @@ self.addEventListener('activate', function(event) {
  * 
  * @since 1.0.0
  */
-self.addEventListener('fetch', function(event) {
-    let request = event.request;
+// self.addEventListener('fetch', function(event) {
+//     let request = event.request;
 
-    if ( request.method !== 'GET' ) {
-        return;
-    }
+//     if ( request.method !== 'GET' ) {
+//         return;
+//     }
 
-    if ( request.url.indexOf(ROOT_URL) === -1 ) {
-        return fetch(request.request)
-    }
+//     if ( request.url.indexOf(ROOT_URL) === -1 ) {
+//         return fetch(request.request)
+//     }
 
-    console.log('FETCH => ', request.url);
+//     console.log('FETCH => ', request.url);
 
-    event.respondWith(
-        //Retourne l'objet en cache
-        caches.match(request)
-        .then(function(response) {
+//     event.respondWith(
+//         //Retourne l'objet en cache
+//         caches.match(request)
+//         .then(function(response) {
             
-            if ( response !== undefined ) {
-                // console.log('FETCH > Ressource en cache => ', request.url );
-                return response;
-            }
+//             if ( response !== undefined ) {
+//                 // console.log('FETCH > Ressource en cache => ', request.url );
+//                 return response;
+//             }
 
-            //Recupere l'objet depuis son URL
-            return fetch(request)
-            .then(function(response) { //Si pas d'erreur 
-                let responseClone = response.clone();
+//             //Recupere l'objet depuis son URL
+//             return fetch(request)
+//             .then(function(response) { //Si pas d'erreur 
+//                 let responseClone = response.clone();
 
-                caches.open(CACHE_VERSION) //On ouvre le cache
-                .then(function(cache) {
-                    cache.put(request, responseClone); //On l'ajoute au cache
-                })
-                .catch(function() {
-                    console.log('FETCH > Error open cache');
+//                 caches.open(CACHE_VERSION) //On ouvre le cache
+//                 .then(function(cache) {
+//                     cache.put(request, responseClone); //On l'ajoute au cache
+//                 })
+//                 .catch(function() {
+//                     console.log('FETCH > Error open cache');
+//                 });
+//             })
+//             .catch(function() { //Si la resource n'est pas accessible
+//                 return caches.match(ROOT_URL+'images/Client1.png');
+//             });
+//         })
+//     );
+// });
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.open(CACHE_VERSION)
+        .then(function(cache) {
+            return cache.match(event.request)
+            .then(function (response) {
+                return response || fetch(event.request).then(function(response) {
+                    cache.put(event.request, response.clone());
+                    return response;
                 });
-            })
-            .catch(function() { //Si la resource n'est pas accessible
-                return caches.match(ROOT_URL+'images/Client1.png');
             });
         })
     );
