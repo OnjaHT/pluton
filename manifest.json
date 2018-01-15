@@ -3,6 +3,13 @@
   "short_name": "Pluton",
   "start_url": "https://onjaharitiana.github.io/pluton/",
   "description": "Juste un petit test avec le thème pluton",
+
+  "scope": "/pluton/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "theme_color": "#FECE1A",
+  "background_color": "##181A1C",
+
   "manifest_version": 2,
   "version": "1.0.0",
   "default_locale": "fr",
