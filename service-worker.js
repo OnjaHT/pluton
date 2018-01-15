@@ -161,6 +161,7 @@ self.addEventListener('notificationclick', function(event) {
     .then(function(clientList) {
         for (var i = 0; i < clientList.length; i++) {
             var client = clientList[i];
+            console.log('Client', client);
             if (client.url == ROOT_URL && 'focus' in client) {
                 return client.focus();
             }
