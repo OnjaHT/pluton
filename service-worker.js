@@ -90,19 +90,7 @@ self.addEventListener('activate', function(event) {
 //         })
 //     );
 // });
-var logged = true;
 self.addEventListener('fetch', function(event) {
-    if ( logged ) {
-        logged = false;
-        // This looks to see if the current is already open and
-        // focuses if it is
-        clients.matchAll({
-            type: "window"
-        })
-        .then(function(clientList) {
-            console.log('clientList', clientList);
-        });
-    }
     event.respondWith(
         caches.open(CACHE_VERSION)
         .then(function(cache) {
@@ -173,7 +161,6 @@ self.addEventListener('notificationclick', function(event) {
     .then(function(clientList) {
         for (var i = 0; i < clientList.length; i++) {
             var client = clientList[i];
-            console.log('Client', client);
             if (client.url == ROOT_URL && 'focus' in client) {
                 return client.focus();
             }
