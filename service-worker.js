@@ -1,5 +1,6 @@
 // console.log('Service worker', this);
 
+var ROOT_URl = 'https://onjaharitiana.github.io/pluton/';
 var CACHE_VERSION = '1.0';
 
 /**
@@ -49,10 +50,13 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
     let request = event.request;
 
-    console.log('Request', request);
-
     if ( request.method !== 'GET' ) {
         return;
+    }
+
+    if ( request.url.indexOf(ROOT_URL) === -1 ) {
+        console.log('Hors domain', request.url);
+        return fetch(request.request)
     }
 
     event.respondWith(
