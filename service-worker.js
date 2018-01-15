@@ -83,7 +83,7 @@ self.addEventListener('fetch', function(event) {
                 });
             })
             .catch(function() { //Si la resource n'est pas accessible
-                // console.log('FETCH > Error 404 => ', request);
+                console.log('FETCH > Error 404 => ', request.url);
                 return Response.error();
             });
         })
