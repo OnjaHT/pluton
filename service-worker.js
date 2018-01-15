@@ -99,9 +99,9 @@ self.addEventListener('fetch', function(event) {
                 return response || fetch(event.request).then(function(response) {
                     cache.put(event.request, response.clone());
                     return response;
-                }).catch(function() {
-                    return cache.match(ROOT_URL + 'images/offline.png');
                 });
+            }).catch(function() {
+                return cache.match(ROOT_URL + 'images/offline.png');
             });
         })
     );
