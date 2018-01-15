@@ -40,19 +40,6 @@ self.addEventListener('activate', function(event) {
             );
         })
     );
-    
-
-    // This looks to see if the current is already open and
-    // focuses if it is
-    event.waitUntil(clients.matchAll({
-        type: "window"
-    })
-    .then(function(clientList) {
-        for (var i = 0; i < clientList.length; i++) {
-            var client = clientList[i];
-            console.log('Client', client);
-        }
-    }));
 });
 
 
@@ -103,7 +90,19 @@ self.addEventListener('activate', function(event) {
 //         })
 //     );
 // });
+var logged = true;
 self.addEventListener('fetch', function(event) {
+    if ( logged ) {
+        logged = true;
+        // This looks to see if the current is already open and
+        // focuses if it is
+        event.waitUntil(clients.matchAll({
+            type: "window"
+        })
+        .then(function(clientList) {
+            console.log('clientList', clientList);
+        }));
+    }
     event.respondWith(
         caches.open(CACHE_VERSION)
         .then(function(cache) {
