@@ -133,13 +133,13 @@ self.addEventListener('message', function(e) {
  * @since 1.0.0
  */
 self.addEventListener('push', function(event) {
-    console.log('SW on Push ===>', event);
+    console.log('SW on Push ===>', event.data);
     event.waitUntil(
         self.registration.showNotification('Pluton notification', {
             body: 'Une notification push a été lancé',
             icon: './images/ico/icon-48.png',
             tag: 'pluton-notification',
-            vibrate: [500, 300],
+            vibrate: [500, 100, 300],
         })
     );
 });
@@ -153,8 +153,6 @@ self.addEventListener('push', function(event) {
 self.addEventListener('notificationclick', function(event) {
     event.notification.close();
 
-    console.log('Notification event', event);
-
     // This looks to see if the current is already open and
     // focuses if it is
     event.waitUntil(clients.matchAll({
@@ -163,12 +161,12 @@ self.addEventListener('notificationclick', function(event) {
     .then(function(clientList) {
         for (var i = 0; i < clientList.length; i++) {
             var client = clientList[i];
-            if (client.url == '/' && 'focus' in client) {
+            if (client.url == '/pluton/' && 'focus' in client) {
                 return client.focus();
             }
         }
         if (clients.openWindow) {
-            return clients.openWindow('/');
+            return clients.openWindow('/pluton/');
         }
     }));
 });

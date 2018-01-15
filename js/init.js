@@ -26,7 +26,7 @@ if ('serviceWorker' in navigator) {
             return serviceWorkerRegistration.pushManager.getSubscription()
             .then(function(subscription) {
                 if ( subscription ) {
-                    console.log('Déjà inscrit au Push : ', subscription);
+                    console.log('Déjà inscrit au Push';
                     return subscription;
                 }
 
@@ -37,6 +37,8 @@ if ('serviceWorker' in navigator) {
                 });
             });
         }).then(function(subscription) {
+            console.log(JSON.stringify(subscription));
+            
             //sauvegarde de l'inscription dans sur le serveur (serveur du site)
             // fetch(ROOT_URL + '/register-to-notification', {
             //     method: 'post',
