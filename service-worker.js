@@ -58,7 +58,7 @@ self.addEventListener('fetch', function(event) {
         return fetch(request.request)
     }
 
-    console.Log('FETCH => ', request.url);
+    console.log('FETCH => ', request.url);
 
     event.respondWith(
         //Retourne l'objet en cache
