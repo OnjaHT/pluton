@@ -6,7 +6,7 @@
 
   "scope": "/pluton/",
   "display": "standalone",
-  "orientation": "landscape",
+  "orientation": "portrait",
   "theme_color": "#FECE1A",
   "background_color": "#181A1C",
 
