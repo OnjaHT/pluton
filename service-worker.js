@@ -161,12 +161,12 @@ self.addEventListener('notificationclick', function(event) {
     .then(function(clientList) {
         for (var i = 0; i < clientList.length; i++) {
             var client = clientList[i];
-            if (client.url == '/pluton/' && 'focus' in client) {
+            if (client.url == ROOT_URL && 'focus' in client) {
                 return client.focus();
             }
         }
         if (clients.openWindow) {
-            return clients.openWindow('/pluton/');
+            return clients.openWindow(ROOT_URL);
         }
     }));
 });
