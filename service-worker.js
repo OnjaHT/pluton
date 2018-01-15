@@ -13,7 +13,8 @@ self.addEventListener('install', function(event) {
         caches.open(CACHE_VERSION)
         .then(function(cache) {
             return cache.addAll([
-                '/pluton/css/animate.css'
+                '/pluton/css/animate.css',
+                '/pluton/images/offline.png'
             ]);
         })
     );
@@ -98,6 +99,8 @@ self.addEventListener('fetch', function(event) {
                 return response || fetch(event.request).then(function(response) {
                     cache.put(event.request, response.clone());
                     return response;
+                }).catch(function() {
+                    return cache.match(ROOT_URL + 'images/offline.png');
                 });
             });
         })
