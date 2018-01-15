@@ -55,9 +55,10 @@ self.addEventListener('fetch', function(event) {
     }
 
     if ( request.url.indexOf(ROOT_URL) === -1 ) {
-        console.log('Hors domain', request.url);
         return fetch(request.request)
     }
+
+    console.Log('FETCH => ', request.url);
 
     event.respondWith(
         //Retourne l'objet en cache
@@ -83,7 +84,6 @@ self.addEventListener('fetch', function(event) {
                 });
             })
             .catch(function() { //Si la resource n'est pas accessible
-                console.log('FETCH > Error 404 => ', request.url);
                 return caches.match(ROOT_URL+'images/Client1.png');
             });
         })
