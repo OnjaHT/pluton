@@ -26,11 +26,11 @@ if ('serviceWorker' in navigator) {
             return serviceWorkerRegistration.pushManager.getSubscription()
             .then(function(subscription) {
                 if ( subscription ) {
-                    console.log('Déjà inscrit au Push');
+                    console.log('----- Déjà inscrit au Push');
                     return subscription;
                 }
 
-                console.log('Pas encore inscrit au Push');
+                console.log('----- Pas encore inscrit au Push');
                 // Demande d'inscription au Push Server
                 return serviceWorkerRegistration.pushManager.subscribe({ 
                     userVisibleOnly: true 
@@ -44,11 +44,11 @@ if ('serviceWorker' in navigator) {
                         authKey: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null
                     };
 
-                    console.log('Données inscription');
+                    console.log('----- Données inscription');
                     console.log(user);
 
                     //sauvegarde de l'inscription dans sur le serveur (serveur du site)
-                    return fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
+                    fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
                         method: 'post',
                         headers: {
                             'Accept': 'application/json',
@@ -57,20 +57,21 @@ if ('serviceWorker' in navigator) {
                         body: JSON.stringify(user)
                     })
                     .then(function(response) {
-                        // return response.json();
-                        return subscription;
+                        console.log( '----- Resultat inscription' );
+                        console.log( response.json() );
                     }).catch(function (err) {
-                        console.log('Could not register subscription into app server', err);
-                        return subscription;
+                        console.log('----- Could not register subscription into app server', err);
                     });
+                    return subscription;
                 });
             });
         }).then(function(subscription) {
+            console.log('----- Subscription JSON');
             console.log(JSON.stringify(subscription));
         })
         .catch(function(subscriptionErr) {
             // Check for a permission prompt issue
-            console.log('Subscription failed ', subscriptionErr);
+            console.log('----- Subscription failed ', subscriptionErr);
         });
     }
 }
