@@ -143,6 +143,7 @@ self.addEventListener('push', function(event) {
     }
     let title = data.title || 'Pluton notification';
     let body = data.message || '';
+    let url = data.url || 'https://onjaharitiana.github.io/pluton/';
 
     event.waitUntil(
         self.registration.showNotification(title, {
@@ -151,7 +152,7 @@ self.addEventListener('push', function(event) {
             tag: 'pluton-notification',
             vibrate: [500, 100, 300],
             data: {
-                url: data.url,
+                url: url,
             },
         })
     );
