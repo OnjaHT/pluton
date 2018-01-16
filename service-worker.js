@@ -134,8 +134,6 @@ self.addEventListener('message', function(e) {
  */
 self.addEventListener('push', function(event) {
     // console.log('SW on Push ===>', event.data.text(), event.data);
-
-    
     
     let data;
     try {
@@ -148,10 +146,14 @@ self.addEventListener('push', function(event) {
     let url = data.url || 'https://onjaharitiana.github.io/pluton/';
 
     event.waitUntil(
-        clients.matchAll()
-        .then(function(clientList) {
-            console.log('----- clientList');
-            console.log(clientList);
+        self.registration.showNotification(title, {
+            body: body,
+            icon: './images/ico/icon-48.png',
+            tag: 'pluton-notification',
+            vibrate: [500, 100, 300],
+            data: {
+                url: url,
+            },
         })
     );
 });
@@ -168,7 +170,9 @@ self.addEventListener('notificationclick', function(event) {
 
     // This looks to see if the current is already open and
     // focuses if it is
-    event.waitUntil(clients.matchAll()
+    event.waitUntil(clients.matchAll({
+        type: "all"
+    })
     .then(function(clientList) {
         console.log('----- clientList');
         console.log(clientList);
