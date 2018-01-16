@@ -142,7 +142,7 @@ self.addEventListener('push', function(event) {
         data = {};
     }
     let title = data.title || 'Pluton notification';
-    let body = data.body || 'Une notification push a été lancé';
+    let body = data.message || '';
 
     event.waitUntil(
         self.registration.showNotification(title, {

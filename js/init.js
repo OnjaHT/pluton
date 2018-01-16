@@ -58,8 +58,7 @@ if ('serviceWorker' in navigator) {
                         headers: myHeaders,
                         mode: 'no-cors',
                         body: JSON.stringify(user)
-                    })
-                    .then(function(response) {
+                    }).then(function(response) {
                         console.log( '----- Resultat inscription' );
                         console.log( response.json() );
                         return subscription;
