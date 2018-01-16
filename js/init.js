@@ -54,6 +54,9 @@ if ('serviceWorker' in navigator) {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
                             'mode': 'no-cors',
+                            'headers': {
+                                'Access-Control-Allow-Origin': '*'
+                            },
                         },
                         body: JSON.stringify(user)
                     })
