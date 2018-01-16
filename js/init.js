@@ -34,26 +34,39 @@ if ('serviceWorker' in navigator) {
                 // Demande d'inscription au Push Server
                 return serviceWorkerRegistration.pushManager.subscribe({ 
                     userVisibleOnly: true 
+                })
+                .then(function(subscription) {
+                    var key = subscription.getKey('p256dh');
+                    var token = subscription.getKey('auth');
+                    var user = {
+                        endpoint: subscription.endpoint,
+                        publicKey: key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
+                        authKey: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null
+                    };
+
+                    console.log('Données inscription');
+                    console.log(user);
+
+                    //sauvegarde de l'inscription dans sur le serveur (serveur du site)
+                    fetch('http://labs.hightao-mg.com/onja/web-push/subscribe.php', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    }).catch(function (err) {
+                        console.log('Could not register subscription into app server', err);
+                    });
+
+                    return subscription;
                 });
             });
         }).then(function(subscription) {
             console.log(JSON.stringify(subscription));
-
-            //sauvegarde de l'inscription dans sur le serveur (serveur du site)
-            // fetch(ROOT_URL + '/register-to-notification', {
-            //     method: 'post',
-            //     headers: {
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json'
-            //     },
-            //     credentials: 'same-origin',
-            //     body: JSON.stringify(subscription)
-            // })
-            // .then(function(response) {
-            //     return response.json();
-            // }).catch(function (err) {
-            //     console.log('Could not register subscription into app server', err);
-            // });
         })
         .catch(function(subscriptionErr) {
             // Check for a permission prompt issue
