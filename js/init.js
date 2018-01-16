@@ -48,7 +48,7 @@ if ('serviceWorker' in navigator) {
                     console.log(user);
 
                     //sauvegarde de l'inscription dans sur le serveur (serveur du site)
-                    fetch('http://labs.hightao-mg.com/onja/web-push/subscribe.php', {
+                    return fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
                         method: 'post',
                         headers: {
                             'Accept': 'application/json',
@@ -57,12 +57,12 @@ if ('serviceWorker' in navigator) {
                         body: JSON.stringify(user)
                     })
                     .then(function(response) {
-                        return response.json();
+                        // return response.json();
+                        return subscription;
                     }).catch(function (err) {
                         console.log('Could not register subscription into app server', err);
+                        return subscription;
                     });
-
-                    return subscription;
                 });
             });
         }).then(function(subscription) {
