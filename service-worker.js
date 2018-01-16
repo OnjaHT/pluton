@@ -133,9 +133,14 @@ self.addEventListener('message', function(e) {
  * @since 1.0.0
  */
 self.addEventListener('push', function(event) {
-    console.log('SW on Push ===>', event.data);
+    console.log('SW on Push ===>', event.data.text(), event.data);
     
-    let data = event.data ? event.data.json() : {};
+    let data;
+    try {
+        data = event.data ? event.data.json() : {};
+    } catch(e) {
+        data = {};
+    }
     let title = data.title || 'Pluton notification';
     let body = data.body || 'Une notification push a été lancé';
 
