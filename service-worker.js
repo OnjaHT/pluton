@@ -134,12 +134,20 @@ self.addEventListener('message', function(e) {
  */
 self.addEventListener('push', function(event) {
     console.log('SW on Push ===>', event.data);
+    
+    let data = event.data ? event.data.json() : {};
+    let title = data.title || 'Pluton notification';
+    let body = data.body || 'Une notification push a été lancé';
+
     event.waitUntil(
-        self.registration.showNotification('Pluton notification', {
-            body: 'Une notification push a été lancé',
+        self.registration.showNotification(title, {
+            body: body,
             icon: './images/ico/icon-48.png',
             tag: 'pluton-notification',
             vibrate: [500, 100, 300],
+            data: {
+                url: data.url,
+            },
         })
     );
 });
@@ -151,6 +159,7 @@ self.addEventListener('push', function(event) {
  * @since 1.0.0
  */
 self.addEventListener('notificationclick', function(event) {
+    let url = event.notification.data ? event.notification.data.url : ROOT_URL;
     event.notification.close();
 
     // This looks to see if the current is already open and
@@ -161,12 +170,12 @@ self.addEventListener('notificationclick', function(event) {
     .then(function(clientList) {
         for (var i = 0; i < clientList.length; i++) {
             var client = clientList[i];
-            if (client.url == ROOT_URL && 'focus' in client) {
+            if (client.url == url && 'focus' in client) {
                 return client.focus();
             }
         }
         if (clients.openWindow) {
-            return clients.openWindow(ROOT_URL);
+            return clients.openWindow(url);
         }
     }));
 });
