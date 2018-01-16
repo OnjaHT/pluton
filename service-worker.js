@@ -174,6 +174,8 @@ self.addEventListener('notificationclick', function(event) {
         type: "all"
     })
     .then(function(clientList) {
+        console.log('----- clientList');
+        console.log(clientList);
         for (var i = 0; i < clientList.length; i++) {
             var client = clientList[i];
             if (client.url == url && 'focus' in client) {
