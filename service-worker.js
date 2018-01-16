@@ -135,11 +135,7 @@ self.addEventListener('message', function(e) {
 self.addEventListener('push', function(event) {
     // console.log('SW on Push ===>', event.data.text(), event.data);
 
-    clients.matchAll()
-    .then(function(clientList) {
-        console.log('----- clientList');
-        console.log(clientList);
-    });
+    
     
     let data;
     try {
@@ -152,14 +148,10 @@ self.addEventListener('push', function(event) {
     let url = data.url || 'https://onjaharitiana.github.io/pluton/';
 
     event.waitUntil(
-        self.registration.showNotification(title, {
-            body: body,
-            icon: './images/ico/icon-48.png',
-            tag: 'pluton-notification',
-            vibrate: [500, 100, 300],
-            data: {
-                url: url,
-            },
+        clients.matchAll()
+        .then(function(clientList) {
+            console.log('----- clientList');
+            console.log(clientList);
         })
     );
 });
