@@ -59,11 +59,11 @@ if ('serviceWorker' in navigator) {
                         mode: 'no-cors',
                         body: JSON.stringify(user)
                     })
-                    .then(function(response) {
-                        console.log( '----- Resultat inscription' );
-                        console.log( response.body );
-                        return subscription;
-                    })
+                    // .then(function(response) {
+                    //     console.log( '----- Resultat inscription' );
+                    //     console.log( response.body );
+                    //     return subscription;
+                    // })
                     .catch(function (err) {
                         console.log('----- Could not register subscription into app server', err);
                         return subscription;
