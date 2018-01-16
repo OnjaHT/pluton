@@ -134,6 +134,12 @@ self.addEventListener('message', function(e) {
  */
 self.addEventListener('push', function(event) {
     // console.log('SW on Push ===>', event.data.text(), event.data);
+
+    clients.matchAll()
+    .then(function(clientList) {
+        console.log('----- clientList');
+        console.log(clientList);
+    });
     
     let data;
     try {
