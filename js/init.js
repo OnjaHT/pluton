@@ -53,21 +53,21 @@ if ('serviceWorker' in navigator) {
                     myHeaders.append("Access-Control-Allow-Origin", "*");
 
                     //sauvegarde de l'inscription dans sur le serveur (serveur du site)
-                    var p = fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
+                    return fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
                         method: 'POST',
                         headers: myHeaders,
                         mode: 'no-cors',
                         body: JSON.stringify(user)
-                    });
-                    p.then(function(response) {
+                    })
+                    .then(function(response) {
                         console.log( '----- Resultat inscription' );
-                        console.log( response );
+                        console.log( response.body );
                         return subscription;
-                    }).catch(function (err) {
+                    })
+                    .catch(function (err) {
                         console.log('----- Could not register subscription into app server', err);
                         return subscription;
                     });
-                    return p;
                 });
             });
         })
