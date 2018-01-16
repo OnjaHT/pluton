@@ -47,17 +47,16 @@ if ('serviceWorker' in navigator) {
                     console.log('----- Données inscription');
                     console.log(user);
 
+                    var myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+                    myHeaders.append("Accept", "application/json");
+                    myHeaders.append("Access-Control-Allow-Origin", "*");
+
                     //sauvegarde de l'inscription dans sur le serveur (serveur du site)
                     return fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
-                        method: 'post',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                            'mode': 'no-cors',
-                            'headers': {
-                                'Access-Control-Allow-Origin': '*'
-                            },
-                        },
+                        method: 'POST',
+                        headers: myHeaders,
+                        mode: 'no-cors',
                         body: JSON.stringify(user)
                     })
                     .then(function(response) {
