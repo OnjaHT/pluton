@@ -170,9 +170,7 @@ self.addEventListener('notificationclick', function(event) {
 
     // This looks to see if the current is already open and
     // focuses if it is
-    event.waitUntil(clients.matchAll({
-        type: "all"
-    })
+    event.waitUntil(clients.matchAll()
     .then(function(clientList) {
         console.log('----- clientList');
         console.log(clientList);
