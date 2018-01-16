@@ -133,7 +133,7 @@ self.addEventListener('message', function(e) {
  * @since 1.0.0
  */
 self.addEventListener('push', function(event) {
-    console.log('SW on Push ===>', event.data.text(), event.data);
+    // console.log('SW on Push ===>', event.data.text(), event.data);
     
     let data;
     try {
