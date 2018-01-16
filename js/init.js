@@ -61,7 +61,7 @@ if ('serviceWorker' in navigator) {
                     });
                     p.then(function(response) {
                         console.log( '----- Resultat inscription' );
-                        console.log( response.json() );
+                        console.log( response );
                         return subscription;
                     }).catch(function (err) {
                         console.log('----- Could not register subscription into app server', err);
