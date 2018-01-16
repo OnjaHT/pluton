@@ -44,8 +44,8 @@ if ('serviceWorker' in navigator) {
                         authKey: token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null
                     };
 
-                    console.log('----- Données inscription');
-                    console.log(user);
+                    // console.log('----- Données inscription');
+                    // console.log(user);
 
                     var myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
@@ -53,21 +53,22 @@ if ('serviceWorker' in navigator) {
                     myHeaders.append("Access-Control-Allow-Origin", "*");
 
                     //sauvegarde de l'inscription dans sur le serveur (serveur du site)
-                    return fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
+                    var p = fetch('https://labs.hightao-mg.com/onja/web-push/subscribe.php', {
                         method: 'POST',
                         headers: myHeaders,
                         mode: 'no-cors',
                         body: JSON.stringify(user)
                     })
-                    // .then(function(response) {
-                    //     console.log( '----- Resultat inscription' );
-                    //     console.log( response.json() );
-                    //     return subscription;
-                    // })
+                    .then(function(response) {
+                        console.log( '----- Resultat inscription' );
+                        console.log( response.json() );
+                        return subscription;
+                    })
                     .catch(function (err) {
                         console.log('----- Could not register subscription into app server', err);
                         return subscription;
                     });
+                    return p;
                 });
             });
         })
